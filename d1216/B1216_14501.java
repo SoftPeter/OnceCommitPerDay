@@ -1,0 +1,37 @@
+package d1216;
+
+import java.util.Scanner;
+
+public class B1216_14501 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int t[] = new int[n+1];
+		int p[] = new int[n+1];
+		int d[] = new int[n+1];
+		
+		for(int i=1; i<=n; i++) {
+			t[i] = sc.nextInt();
+			p[i] = sc.nextInt();
+			
+			d[i] = p[i];
+		}
+		
+		for(int i=2; i<=n; i++) {
+			for(int j=1; j<i; j++) {
+				if(i-j >= t[j]) {
+					d[i] = Math.max(d[i], p[i]+d[j]);
+				}
+			}
+			//System.out.println("d[" + i + "] = " + d[i]);
+		}
+		
+		int ans = 0;
+		for(int i=1; i<=n; i++) {
+			if(i+t[i] <= n+1)
+				ans = Math.max(ans, d[i]);
+		}
+		System.out.println(ans);
+		
+	}
+}
